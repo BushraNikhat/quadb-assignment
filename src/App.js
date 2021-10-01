@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Navbar from "./components/Navbar"
+import {Route,Switch,Redirect} from "react-router-dom"
+import MovieList from './components/MovieList'
+import { useSelector } from "react-redux";
+import MovieDetail from './components/MovieDetail';
 
-function App() {
+const App = () => {
+  const state = useSelector(state => state.detailReducer)
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Navbar/>
+      <Switch>
+        <Route exact path="/" component={MovieList} />
+        { Object.keys(state).length && 
+          <Route exact path={`/details/${state.show.name}`} component={MovieDetail} />
+        }
+      </Switch>
+
+    </>
+  )
 }
 
-export default App;
+export default App
