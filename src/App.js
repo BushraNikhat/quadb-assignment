@@ -20,6 +20,7 @@ const App = () => {
         { Object.keys(state).length && 
           <Route exact path={`/details/${state.show.name}`} component={MovieDetail} />
         }
+        <Redirect to="/" />
       </Switch>
 
     </>
